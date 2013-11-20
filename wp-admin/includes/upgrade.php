@@ -1553,9 +1553,9 @@ function dbDelta( $queries = '', $execute = true ) {
 			continue;
 
 		// Fetch the table column structure from the database
-		$wpdb->suppress_errors();
+		$suppress = $wpdb->suppress_errors();
 		$tablefields = $wpdb->get_results("DESCRIBE {$table};");
-		$wpdb->suppress_errors( false );
+		$wpdb->suppress_errors( $suppress );
 
 		if ( ! $tablefields )
 			continue;
@@ -2007,7 +2007,7 @@ function maybe_disable_link_manager() {
  * @since 2.9.0
  */
 function pre_schema_upgrade() {
-	global $wp_current_db_version, $wp_db_version, $wpdb;
+	global $wp_current_db_version, $wpdb;
 
 	// Upgrade versions prior to 2.9
 	if ( $wp_current_db_version < 11557 ) {
