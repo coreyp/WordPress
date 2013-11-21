@@ -203,13 +203,15 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
  * Outputs the footer for the login page.
  *
  * @param string $input_id Which input to auto-focus
+
+ (sigh) another core edit because no hook available. was: 
+ <p id="backtoblog"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php esc_attr_e( 'Are you lost?' ); ?>"><?php printf( __( '&larr; Back to %s' ), get_bloginfo( 'title', 'display' ) ); ?></a></p>
  */
 function login_footer($input_id = '') {
 	global $interim_login;
-
 	// Don't allow interim logins to navigate away from the page.
-	if ( ! $interim_login ): ?>
-	<p id="backtoblog"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php esc_attr_e( 'Are you lost?' ); ?>"><?php printf( __( '&larr; Back to %s' ), get_bloginfo( 'title', 'display' ) ); ?></a></p>
+	if ( ! $interim_login ): ?>	
+	<p id="backtoblog"><a href="<?php echo esc_url( network_home_url( '/' ) ); ?>" title="<?php esc_attr_e( 'Are you lost?' ); ?>"><?php printf( __( '&larr; Back' ) ); ?></a></p>
 	<?php endif; ?>
 
 	</div>
